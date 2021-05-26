@@ -66,7 +66,7 @@ typedef size_t gdb_ps_size_t;
    ps_ptwrite.  */
 
 static ps_err_e
-ps_xfer_memory (const struct ps_prochandle *ph, paddr_t addr,
+ps_xfer_memory (const struct ps_prochandle *ph, psaddr_t addr,
 		gdb_byte *buf, size_t len, int write)
 {
   struct cleanup *old_chain = save_inferior_ptid ();
@@ -172,7 +172,7 @@ ps_plog (const char *fmt, ...)
 
 ps_err_e
 ps_pglobal_lookup (gdb_ps_prochandle_t ph, const char *obj,
-		   const char *name, paddr_t *sym_addr)
+		   const char *name, psaddr_t *sym_addr)
 {
   struct minimal_symbol *ms;
 
@@ -189,7 +189,7 @@ ps_pglobal_lookup (gdb_ps_prochandle_t ph, const char *obj,
    them into BUF.  */
 
 ps_err_e
-ps_pdread (gdb_ps_prochandle_t ph, paddr_t addr,
+ps_pdread (gdb_ps_prochandle_t ph, psaddr_t addr,
 	   gdb_ps_read_buf_t buf, gdb_ps_size_t size)
 {
   return ps_xfer_memory (ph, addr, buf, size, 0);
@@ -198,7 +198,7 @@ ps_pdread (gdb_ps_prochandle_t ph, paddr_t addr,
 /* Write SIZE bytes from BUF into the target process PH at address ADDR.  */
 
 ps_err_e
-ps_pdwrite (gdb_ps_prochandle_t ph, paddr_t addr,
+ps_pdwrite (gdb_ps_prochandle_t ph, psaddr_t addr,
 	    gdb_ps_write_buf_t buf, gdb_ps_size_t size)
 {
   return ps_xfer_memory (ph, addr, (gdb_byte *) buf, size, 1);
@@ -208,7 +208,7 @@ ps_pdwrite (gdb_ps_prochandle_t ph, paddr_t addr,
    them into BUF.  */
 
 ps_err_e
-ps_ptread (gdb_ps_prochandle_t ph, paddr_t addr,
+ps_ptread (gdb_ps_prochandle_t ph, psaddr_t addr,
 	   gdb_ps_read_buf_t buf, gdb_ps_size_t size)
 {
   return ps_xfer_memory (ph, addr, (gdb_byte *) buf, size, 0);
@@ -217,7 +217,7 @@ ps_ptread (gdb_ps_prochandle_t ph, paddr_t addr,
 /* Write SIZE bytes from BUF into the target process PH at address ADDR.  */
 
 ps_err_e
-ps_ptwrite (gdb_ps_prochandle_t ph, paddr_t addr,
+ps_ptwrite (gdb_ps_prochandle_t ph, psaddr_t addr,
 	    gdb_ps_write_buf_t buf, gdb_ps_size_t size)
 {
   return ps_xfer_memory (ph, addr, (gdb_byte *) buf, size, 1);

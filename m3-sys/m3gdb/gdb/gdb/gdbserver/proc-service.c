@@ -75,14 +75,14 @@ gregset_info(void)
 
 ps_err_e
 ps_pglobal_lookup (gdb_ps_prochandle_t ph, const char *obj,
-		   const char *name, paddr_t *sym_addr)
+		   const char *name, psaddr_t *sym_addr)
 {
   CORE_ADDR addr;
 
   if (look_up_one_symbol (name, &addr) == 0)
     return PS_NOSYM;
 
-  *sym_addr = (paddr_t) (unsigned long) addr;
+  *sym_addr = (psaddr_t) (unsigned long) addr;
   return PS_OK;
 }
 
@@ -90,7 +90,7 @@ ps_pglobal_lookup (gdb_ps_prochandle_t ph, const char *obj,
    them into BUF.  */
 
 ps_err_e
-ps_pdread (gdb_ps_prochandle_t ph, paddr_t addr,
+ps_pdread (gdb_ps_prochandle_t ph, psaddr_t addr,
 	   gdb_ps_read_buf_t buf, gdb_ps_size_t size)
 {
   read_inferior_memory (addr, buf, size);
@@ -100,7 +100,7 @@ ps_pdread (gdb_ps_prochandle_t ph, paddr_t addr,
 /* Write SIZE bytes from BUF into the target process PH at address ADDR.  */
 
 ps_err_e
-ps_pdwrite (gdb_ps_prochandle_t ph, paddr_t addr,
+ps_pdwrite (gdb_ps_prochandle_t ph, psaddr_t addr,
 	    gdb_ps_write_buf_t buf, gdb_ps_size_t size)
 {
   return write_inferior_memory (addr, buf, size);
